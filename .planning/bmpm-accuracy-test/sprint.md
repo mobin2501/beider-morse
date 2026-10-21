@@ -27,8 +27,8 @@
   negatives have empty target
 - Clear error messages; abort on failure
 
-## T4 Matcher — PENDING
-- `BMPMMatcher(name_mode, match_mode)`
+## T4 Matcher — DONE
+- `BMPMMatcher(name_mode, match_mode, concat)`
   - `encode()` → `set[str]`
   - `build_index(names)` — inverted index code → names
   - `match(query)` → `list[str]`
@@ -38,7 +38,7 @@
 - `summarize_overall`, `summarize_by_length`, `summarize_by_variant`
 
 ## T6 CLI — PENDING
-- `run_test.py --names --cases --out --name-mode --match-mode --allow-uneven`
+- `run_test.py --names --cases --out --name-mode --match-mode --concat --allow-uneven`
 - Prints config, overall metrics, per-length table
 - Writes `results.csv` + `summary.json`
 

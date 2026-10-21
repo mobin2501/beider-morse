@@ -30,6 +30,10 @@ Outputs:
   language auto-detect; overridable via CLI flags.
 - **Match rule:** a query matches a list name if their BMPM code sets intersect
   (standard BMPM usage). An inverted index code → names is built once over the list.
+  Codes are compared case-sensitively (exact mode emits codes like `Smit`).
+- **Multi-word names:** library default `concat=False` encodes per word, so
+  "Garcia Rodriguez" matches the list name "Rodriguez". This is measured as-is (how
+  BMPM behaves out of the box); `--concat` re-runs with whole-name encoding for comparison.
 - **Length** = `len(query)` including spaces and hyphens.
 - **Case-level confusion matrix:**
   - TP = positive, target in matches
