@@ -39,6 +39,10 @@ Outputs:
 - **Metrics:** precision, recall, F1, accuracy, specificity; plus mean candidate-set
   size and candidate precision (mean of 1/|candidates| on hits) to expose over-matching.
 - **Data:** CSVs the user generates with LLM prompts shipped in `prompts/`.
+- **Validation strictness:** integrity errors (bad lengths, missing targets, duplicates,
+  query already in list) are always fatal; distribution mismatches (per-length counts,
+  7/3 split) are fatal unless `--allow-uneven`, which downgrades them to warnings.
+  All problems are collected and reported in one error so a CSV is fixed in one pass.
 - **Report:** PDF via reportlab + matplotlib charts. `presentation.md` is generated from
   the same results so numbers never drift from the report.
 

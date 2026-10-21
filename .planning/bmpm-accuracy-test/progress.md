@@ -2,8 +2,8 @@
 
 - **Status:** IN PROGRESS
 - **Branch:** `feature/bmpm-accuracy-test` (off `main`)
-- **Done:** T1 Scaffold (.venv, pinned requirements, README, package skeleton),
-  T2 LLM prompts (`prompts/names_prompt.md`, `prompts/test_cases_prompt.md`)
-- **Next:** T3 Data + validation
+- **Done:** T1 Scaffold, T2 LLM prompts, T3 Data + validation (`bmpm_test/data.py`,
+  `tests/test_data.py`)
+- **Next:** T4 Matcher
 - **Blocked on:** user-generated `data/names.csv` and `data/test_cases.csv`
   (needed for the final run only)

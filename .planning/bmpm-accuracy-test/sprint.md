@@ -20,7 +20,7 @@
   - `expected_match` = exact list name (positive) or empty (negative)
   - Query must not itself be in the list
 
-## T3 Data + validation — PENDING
+## T3 Data + validation — DONE
 - `load_names`, `load_cases`
 - `validate_names`: count, duplicates, length stratification
 - `validate_cases`: 10/length, 7/3 split, `length == len(query)`, targets exist,
@@ -38,7 +38,7 @@
 - `summarize_overall`, `summarize_by_length`, `summarize_by_variant`
 
 ## T6 CLI — PENDING
-- `run_test.py --names --cases --out --name-mode --match-mode`
+- `run_test.py --names --cases --out --name-mode --match-mode --allow-uneven`
 - Prints config, overall metrics, per-length table
 - Writes `results.csv` + `summary.json`
 
