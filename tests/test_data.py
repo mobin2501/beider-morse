@@ -146,6 +146,12 @@ def test_query_in_name_list_is_error():
         validate_cases(replace_case(0, query="LI"), NAMES, SPEC)
 
 
+def test_duplicate_queries_are_case_insensitive():
+    with pytest.raises(DataValidationError) as excinfo:
+        validate_cases(replace_case(1, query="LY"), NAMES, SPEC, allow_uneven=True)
+    assert "duplicate query 'ly'" in errors_of(excinfo)
+
+
 def test_variant_type_must_fit_case_type():
     with pytest.raises(DataValidationError) as excinfo:
         validate_cases(replace_case(1, variant_type="transliteration"), NAMES, SPEC)
