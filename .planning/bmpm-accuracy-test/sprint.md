@@ -37,7 +37,7 @@
 - `evaluate_cases` → per-case outcome rows (TP/FN/FP/TN, candidates)
 - `summarize_overall`, `summarize_by_length`, `summarize_by_variant`
 
-## T6 CLI — PENDING
+## T6 CLI — DONE
 - `run_test.py --names --cases --out --name-mode --match-mode --concat --allow-uneven`
 - Prints config, overall metrics, per-length table
 - Writes `results.csv` + `summary.json`
