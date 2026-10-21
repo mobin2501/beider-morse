@@ -64,6 +64,7 @@ The query must not sound like **any** name in `names.csv`. Use one of these
 
 ### Rules
 - `query` must **not** appear in `names.csv`, case-insensitively.
+- Every `query` is unique across all 200 rows, case-insensitively.
 - Every positive `expected_match` must appear in `names.csv` exactly as written.
 - Use each list name as a target no more than once.
 - Use plain ASCII letters only. Use spaces and hyphens only in compound names,
@@ -75,7 +76,7 @@ The query must not sound like **any** name in `names.csv`. Use one of these
 ### Self-check before answering
 1. Each length 2..21 has exactly 7 positive and 3 negative rows.
 2. The `length` column equals the true character count of `query`.
-3. No `query` appears in `names.csv`.
+3. No `query` appears in `names.csv`, and no `query` repeats.
 4. Every positive `expected_match` exists in `names.csv` verbatim, and every
    negative `expected_match` is empty.
 5. There are exactly 200 data rows plus 1 header row.

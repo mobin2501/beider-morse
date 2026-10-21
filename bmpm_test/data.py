@@ -199,6 +199,9 @@ def validate_cases(
 
     for dup in _duplicates(c.case_id for c in cases):
         found.errors.append(f"duplicate case_id {dup!r}")
+    # A repeated query would be scored twice and skew the metrics.
+    for dup in _duplicates(c.query.casefold() for c in cases):
+        found.errors.append(f"duplicate query {dup!r} (case-insensitive)")
 
     for c in cases:
         where = f"case {c.case_id or '<no id>'} ({c.query!r})"

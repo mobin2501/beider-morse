@@ -1,8 +1,34 @@
 # BMPM Accuracy Test — Progress
 
-- **Status:** IN PROGRESS
-- **Branch:** `feature/bmpm-accuracy-test` (off `main`)
-- **Done:** T1–T8; T9 sample fixture (`data/sample/`), E2E test (`tests/test_e2e.py`,
-  outcomes pinned for per-word and concat), README sample command. 61 tests passing.
-- **Next:** T9 final step — run on user data, fix validation issues, review report.pdf
-- **Blocked on:** user-generated `data/names.csv` and `data/test_cases.csv`
+- **Status:** IN PROGRESS — waiting on user data
+- **Branch:** `feature/bmpm-accuracy-test` (off `main`); nothing pushed yet
+- **Done:** T1–T8 committed; T9 sample fixture (`data/sample/`), E2E test
+  (`tests/test_e2e.py`, outcomes pinned for per-word and concat), README sample command.
+  Validator now rejects duplicate queries (uncommitted). 62 tests passing.
+- **Blocked on:** user regenerating `data/names.csv` and `data/test_cases.csv`
+
+## 2026-10-22 first data attempt — rejected, regenerate
+Root-level `Beider-Morse ... Test Dataset - *.csv` used a different column format
+(converted via a scratchpad script) and failed validation:
+- names: 1000 rows but only 870 unique (lengths 2 and 3 had 10 unique each); many invented strings
+- cases: 19 queries already in the name list; duplicate queries (Ka, Ni, Gab, Wal)
+Decision: regenerate with `prompts/*.md` (output already matches `data/` format, no conversion).
+Root-level `.docx`/`.pptx` are the user's deliverables: update them after the final run;
+do not commit them until then.
+
+## Resume here (next session)
+1. **User generates data** with the LLM prompts:
+   - `prompts/names_prompt.md` → `data/names.csv` (1000 names, 50 per length 2–21)
+   - `prompts/test_cases_prompt.md` + attach names.csv → `data/test_cases.csv`
+     (200 cases, 10 per length, 7 pos / 3 neg)
+   - Format reference: `data/sample/`
+2. **Run:** `source .venv/bin/activate && python run_test.py`
+   - Validation lists all problems at once; expect LLM length miscounts → fix/regenerate.
+   - `--allow-uneven` only downgrades count mismatches; integrity errors must be fixed.
+3. **Review together:** `results/report.pdf` — go through FN/FP lists (some may be
+   label errors). Optionally compare with a `--concat` run (on the sample it removed the
+   compound-name FP and raised candidate precision 56.5% → 92.9%).
+4. **Close out:** mark T9 DONE in sprint.md, update this file + `.planning/progress.md`, `/commit`.
+5. **Push/PR:** only on explicit user approval (`/push-pr`).
+
+Deliverables after step 2: `results/report.pdf`, `results/presentation.md` (user builds the deck).
