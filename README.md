@@ -34,8 +34,23 @@ match the expected structure.
 python run_test.py --names data/names.csv --cases data/test_cases.csv --out results/
 ```
 
-Optional flags: `--name-mode {generic,ashkenazi,sephardic}` (default `generic`),
-`--match-mode {approx,exact}` (default `approx`).
+Optional flags:
+- `--name-mode {generic,ashkenazi,sephardic}` (default `generic`)
+- `--match-mode {approx,exact}` (default `approx`)
+- `--concat` — encode multi-word names as one word (default: per word, so
+  "Garcia Rodriguez" matches "Rodriguez")
+- `--allow-uneven` — report per-length count mismatches as warnings instead of errors
+
+### Try it on the sample
+
+`data/sample/` holds a small fixture (40 names, 24 cases) in the same format as
+the real data. It doesn't have the full 50/10-per-length counts, so it needs
+`--allow-uneven`:
+
+```bash
+python run_test.py --names data/sample/names.csv --cases data/sample/test_cases.csv \
+  --out results/sample --allow-uneven
+```
 
 ## Test
 

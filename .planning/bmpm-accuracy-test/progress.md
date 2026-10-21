@@ -2,9 +2,7 @@
 
 - **Status:** IN PROGRESS
 - **Branch:** `feature/bmpm-accuracy-test` (off `main`)
-- **Done:** T1 Scaffold, T2 LLM prompts, T3 Data + validation, T4 Matcher, T5 Metrics,
-  T6 CLI, T7 PDF report, T8 presentation.md (`bmpm_test/slides.py`, `tests/test_slides.py`)
-- **Next:** T9 Tests + E2E (unit tests already exist per task; remaining: `data/sample/`
-  fixture, E2E on sample, then on user data)
+- **Done:** T1–T8; T9 sample fixture (`data/sample/`), E2E test (`tests/test_e2e.py`,
+  outcomes pinned for per-word and concat), README sample command. 61 tests passing.
+- **Next:** T9 final step — run on user data, fix validation issues, review report.pdf
 - **Blocked on:** user-generated `data/names.csv` and `data/test_cases.csv`
-  (needed for the final run only)
