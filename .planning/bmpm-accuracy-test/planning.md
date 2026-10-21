@@ -42,6 +42,8 @@ Outputs:
   - TN = negative, no match
 - **Metrics:** precision, recall, F1, accuracy, specificity; plus mean candidate-set
   size and candidate precision (mean of 1/|candidates| on hits) to expose over-matching.
+  Undefined metrics (zero denominator, e.g. recall for a negative-only variant group)
+  are `None` and rendered as n/a, never 0.
 - **Data:** CSVs the user generates with LLM prompts shipped in `prompts/`.
 - **Validation strictness:** integrity errors (bad lengths, missing targets, duplicates,
   query already in list) are always fatal; distribution mismatches (per-length counts,

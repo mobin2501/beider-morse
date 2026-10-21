@@ -33,7 +33,7 @@
   - `build_index(names)` — inverted index code → names
   - `match(query)` → `list[str]`
 
-## T5 Metrics — PENDING
+## T5 Metrics — DONE
 - `evaluate_cases` → per-case outcome rows (TP/FN/FP/TN, candidates)
 - `summarize_overall`, `summarize_by_length`, `summarize_by_variant`
 
