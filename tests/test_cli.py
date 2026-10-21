@@ -54,6 +54,7 @@ def test_run_writes_results_and_summary(data_files, capsys):
     assert set(summary["by_length"]) == {"3", "5"}
     assert summary["warnings"]
     assert (out / "report.pdf").read_bytes().startswith(b"%PDF")
+    assert "## Slide 11: Recommendations" in (out / "presentation.md").read_text(encoding="utf-8")
 
 
 def test_uneven_data_fails_without_flag(data_files, capsys):

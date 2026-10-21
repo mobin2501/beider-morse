@@ -48,8 +48,8 @@
   all FN/FP listed, methodology + limitations
 - Load dataviz skill before writing chart code
 
-## T8 presentation.md — PENDING
-- `build_slides`: ~10 slides — title, goal, method, dataset, headline metrics, by length,
+## T8 presentation.md — DONE
+- `build_slides`: 11 slides — title, goal, method, dataset, headline metrics, by length,
   over-matching, failure examples, limitations, recommendations
 - Include chart paths + speaker notes
 
