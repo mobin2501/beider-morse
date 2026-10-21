@@ -1,13 +1,13 @@
 # BMPM Accuracy Test — Sprint
 
-## T1 Scaffold — PENDING
+## T1 Scaffold — DONE
 - Create virtual env with built-in venv: `python3 -m venv .venv`
 - `requirements.txt` with pinned abydos, reportlab, matplotlib, pytest
 - `.gitignore` (`.venv/`, `__pycache__/`, `results/`)
 - README: setup (venv + pip install) and run instructions
 - Package skeleton `bmpm_test/`
 
-## T2 LLM prompts — PENDING
+## T2 LLM prompts — DONE
 - `prompts/names_prompt.md` → CSV `id,name,origin`
   - Exactly 50 unique names per length 2..21 (1000 total)
   - Mixed origins: Anglo, Germanic, Slavic, Jewish, Hispanic, Italian, Arabic,
