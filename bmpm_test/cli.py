@@ -29,6 +29,7 @@ from bmpm_test.metrics import (
     summarize_by_variant,
     summarize_overall,
 )
+from bmpm_test.report import build_report
 
 EXIT_DATA_ERROR = 2
 
@@ -174,5 +175,6 @@ def main(argv: list[str] | None = None) -> int:
     write_results_csv(args.out / "results.csv", results)
     summary = build_summary(config, dataset, warnings, overall, by_length, by_variant)
     (args.out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
-    print(f"\nWrote {args.out / 'results.csv'} and {args.out / 'summary.json'}")
+    report = build_report(args.out, summary, results, matcher.encode)
+    print(f"\nWrote {args.out / 'results.csv'}, {args.out / 'summary.json'} and {report}")
     return 0

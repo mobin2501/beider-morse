@@ -54,11 +54,13 @@ Outputs:
 
 ## Architecture
 ```
-run_test.py (CLI) -> bmpm_test/
+run_test.py -> bmpm_test/
+  cli.py      args, terminal output, results.csv + summary.json, calls report
   data.py     load + validate names/cases
   matcher.py  BMPM encode, index, match
   metrics.py  case outcomes + summaries (overall / by length / by variant)
-  report.py   charts + report.pdf
+  charts.py   PNG charts (shared by report + slides)
+  report.py   report.pdf layout
   slides.py   presentation.md
 prompts/  names_prompt.md, test_cases_prompt.md
 data/     names.csv, test_cases.csv (+ tiny sample/ fixture)

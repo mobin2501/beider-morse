@@ -42,7 +42,7 @@
 - Prints config, overall metrics, per-length table
 - Writes `results.csv` + `summary.json`
 
-## T7 PDF report — PENDING
+## T7 PDF report — DONE
 - `build_report`: title/config, dataset summary, overall metrics, confusion matrix,
   recall & FPR by length chart, candidate-set size by length chart, by-variant table,
   all FN/FP listed, methodology + limitations
