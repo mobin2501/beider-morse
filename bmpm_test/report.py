@@ -115,15 +115,21 @@ def _table(rows: list[list], col_widths: list[float], left_align_cols: int = 1) 
 
 # --- sections ----------------------------------------------------------------
 
-def takeaway(summary: dict) -> str:
+def html_bold(text: str) -> str:
+    return f"<b>{text}</b>"
+
+
+def takeaway(summary: dict, bold: Callable[[str], str] = html_bold) -> str:
+    """Plain-English headline; ``bold`` lets markdown callers swap the emphasis markup."""
     o = summary["overall"]
     positives, negatives = o["tp"] + o["fn"], o["fp"] + o["tn"]
     parts = []
     if positives:
-        parts.append(f"BMPM found the intended name for <b>{o['tp']} of {positives}</b> positive queries "
-                     f"(recall {pct(o['recall'])}).")
+        found = bold(f"{o['tp']} of {positives}")
+        parts.append(f"BMPM found the intended name for {found} positive queries (recall {pct(o['recall'])}).")
     if negatives:
-        parts.append(f"<b>{o['fp']} of {negatives}</b> negative queries matched at least one name "
+        matched = bold(f"{o['fp']} of {negatives}")
+        parts.append(f"{matched} negative queries matched at least one name "
                      f"(false-positive rate {pct(false_positive_rate(o['specificity']))}).")
     parts.append(f"Each query returned {num(o['mean_candidates'])} names on average.")
 

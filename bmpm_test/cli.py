@@ -30,6 +30,7 @@ from bmpm_test.metrics import (
     summarize_overall,
 )
 from bmpm_test.report import build_report
+from bmpm_test.slides import build_slides
 
 EXIT_DATA_ERROR = 2
 
@@ -176,5 +177,6 @@ def main(argv: list[str] | None = None) -> int:
     summary = build_summary(config, dataset, warnings, overall, by_length, by_variant)
     (args.out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     report = build_report(args.out, summary, results, matcher.encode)
-    print(f"\nWrote {args.out / 'results.csv'}, {args.out / 'summary.json'} and {report}")
+    slides = build_slides(args.out, summary, results, matcher.encode)
+    print(f"\nWrote {args.out / 'results.csv'}, {args.out / 'summary.json'}, {report} and {slides}")
     return 0
