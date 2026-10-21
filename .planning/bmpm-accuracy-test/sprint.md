@@ -53,7 +53,7 @@
   over-matching, failure examples, limitations, recommendations
 - Include chart paths + speaker notes
 
-## T9 Tests + E2E — IN PROGRESS (only the user-data run remains)
+## T9 Tests + E2E — DONE
 - pytest for validation and metrics
 - Sample fixture in `data/sample/`
 - E2E run on sample, then on user data when provided

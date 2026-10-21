@@ -1,6 +1,6 @@
 # BMPM Accuracy Test — Progress
 
-- **Status:** IN PROGRESS — waiting on user data
+- **Status:** PR PENDING — T1–T9 done; awaiting push approval
 - **Branch:** `feature/bmpm-accuracy-test` (off `main`); nothing pushed yet
 - **Done:** T1–T8 committed; T9 sample fixture (`data/sample/`), E2E test
   (`tests/test_e2e.py`, outcomes pinned for per-word and concat), README sample command.
@@ -40,3 +40,10 @@ Deliverables after step 2: `results/report.pdf`, `results/presentation.md` (user
 - Result: recall 89.3%, precision 94.7%, F1 91.9%, specificity 88.3% (15 FN, 7 FP).
   `--concat`: recall 82.1%, precision 97.5%, specificity 95.0%.
 - Next: review `results/report.pdf` with user → update root .docx/.pptx → then commit.
+
+## 2026-10-22 deliverables updated
+- Root `.docx` report and `.pptx` deck filled with final-run results (TBDs replaced,
+  unsupported latency/typo claims replaced with measured findings). Not rendered locally
+  (no LibreOffice): user to check layout, esp. slide 2 cards.
+- Old root dataset CSVs (first attempt) intentionally left untracked; `data/` supersedes them.
+- Next: `/push-pr` on user approval.
