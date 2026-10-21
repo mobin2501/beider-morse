@@ -1,13 +1,13 @@
 # BMPM Accuracy Test — Sprint
 
-## T1 Scaffold — PENDING
+## T1 Scaffold — DONE
 - Create virtual env with built-in venv: `python3 -m venv .venv`
 - `requirements.txt` with pinned abydos, reportlab, matplotlib, pytest
 - `.gitignore` (`.venv/`, `__pycache__/`, `results/`)
 - README: setup (venv + pip install) and run instructions
 - Package skeleton `bmpm_test/`
 
-## T2 LLM prompts — PENDING
+## T2 LLM prompts — DONE
 - `prompts/names_prompt.md` → CSV `id,name,origin`
   - Exactly 50 unique names per length 2..21 (1000 total)
   - Mixed origins: Anglo, Germanic, Slavic, Jewish, Hispanic, Italian, Arabic,
@@ -20,40 +20,40 @@
   - `expected_match` = exact list name (positive) or empty (negative)
   - Query must not itself be in the list
 
-## T3 Data + validation — PENDING
+## T3 Data + validation — DONE
 - `load_names`, `load_cases`
 - `validate_names`: count, duplicates, length stratification
 - `validate_cases`: 10/length, 7/3 split, `length == len(query)`, targets exist,
   negatives have empty target
 - Clear error messages; abort on failure
 
-## T4 Matcher — PENDING
-- `BMPMMatcher(name_mode, match_mode)`
+## T4 Matcher — DONE
+- `BMPMMatcher(name_mode, match_mode, concat)`
   - `encode()` → `set[str]`
   - `build_index(names)` — inverted index code → names
   - `match(query)` → `list[str]`
 
-## T5 Metrics — PENDING
+## T5 Metrics — DONE
 - `evaluate_cases` → per-case outcome rows (TP/FN/FP/TN, candidates)
 - `summarize_overall`, `summarize_by_length`, `summarize_by_variant`
 
-## T6 CLI — PENDING
-- `run_test.py --names --cases --out --name-mode --match-mode`
+## T6 CLI — DONE
+- `run_test.py --names --cases --out --name-mode --match-mode --concat --allow-uneven`
 - Prints config, overall metrics, per-length table
 - Writes `results.csv` + `summary.json`
 
-## T7 PDF report — PENDING
+## T7 PDF report — DONE
 - `build_report`: title/config, dataset summary, overall metrics, confusion matrix,
   recall & FPR by length chart, candidate-set size by length chart, by-variant table,
   all FN/FP listed, methodology + limitations
 - Load dataviz skill before writing chart code
 
-## T8 presentation.md — PENDING
-- `build_slides`: ~10 slides — title, goal, method, dataset, headline metrics, by length,
+## T8 presentation.md — DONE
+- `build_slides`: 11 slides — title, goal, method, dataset, headline metrics, by length,
   over-matching, failure examples, limitations, recommendations
 - Include chart paths + speaker notes
 
-## T9 Tests + E2E — PENDING
+## T9 Tests + E2E — DONE
 - pytest for validation and metrics
 - Sample fixture in `data/sample/`
 - E2E run on sample, then on user data when provided

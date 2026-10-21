@@ -30,6 +30,10 @@ Outputs:
   language auto-detect; overridable via CLI flags.
 - **Match rule:** a query matches a list name if their BMPM code sets intersect
   (standard BMPM usage). An inverted index code → names is built once over the list.
+  Codes are compared case-sensitively (exact mode emits codes like `Smit`).
+- **Multi-word names:** library default `concat=False` encodes per word, so
+  "Garcia Rodriguez" matches the list name "Rodriguez". This is measured as-is (how
+  BMPM behaves out of the box); `--concat` re-runs with whole-name encoding for comparison.
 - **Length** = `len(query)` including spaces and hyphens.
 - **Case-level confusion matrix:**
   - TP = positive, target in matches
@@ -38,17 +42,25 @@ Outputs:
   - TN = negative, no match
 - **Metrics:** precision, recall, F1, accuracy, specificity; plus mean candidate-set
   size and candidate precision (mean of 1/|candidates| on hits) to expose over-matching.
+  Undefined metrics (zero denominator, e.g. recall for a negative-only variant group)
+  are `None` and rendered as n/a, never 0.
 - **Data:** CSVs the user generates with LLM prompts shipped in `prompts/`.
+- **Validation strictness:** integrity errors (bad lengths, missing targets, duplicates,
+  query already in list) are always fatal; distribution mismatches (per-length counts,
+  7/3 split) are fatal unless `--allow-uneven`, which downgrades them to warnings.
+  All problems are collected and reported in one error so a CSV is fixed in one pass.
 - **Report:** PDF via reportlab + matplotlib charts. `presentation.md` is generated from
   the same results so numbers never drift from the report.
 
 ## Architecture
 ```
-run_test.py (CLI) -> bmpm_test/
+run_test.py -> bmpm_test/
+  cli.py      args, terminal output, results.csv + summary.json, calls report
   data.py     load + validate names/cases
   matcher.py  BMPM encode, index, match
   metrics.py  case outcomes + summaries (overall / by length / by variant)
-  report.py   charts + report.pdf
+  charts.py   PNG charts (shared by report + slides)
+  report.py   report.pdf layout
   slides.py   presentation.md
 prompts/  names_prompt.md, test_cases_prompt.md
 data/     names.csv, test_cases.csv (+ tiny sample/ fixture)
