@@ -34,6 +34,9 @@ from bmpm_test.slides import build_slides
 
 EXIT_DATA_ERROR = 2
 
+RESULTS_FILE = "artifact 1.csv"
+SUMMARY_FILE = "artifact 2.json"
+
 RESULT_COLUMNS = (
     "case_id", "query", "length", "case_type", "variant_type",
     "expected_match", "outcome", "candidate_count", "candidates",
@@ -42,8 +45,8 @@ RESULT_COLUMNS = (
 
 def parse_args(argv: list[str] | None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Measure Beider-Morse phonetic matching accuracy.")
-    parser.add_argument("--names", type=Path, default=Path("data/names.csv"), help="name list CSV")
-    parser.add_argument("--cases", type=Path, default=Path("data/test_cases.csv"), help="test cases CSV")
+    parser.add_argument("--names", type=Path, default=Path("data/input 1.csv"), help="name list CSV")
+    parser.add_argument("--cases", type=Path, default=Path("data/input 2.csv"), help="test cases CSV")
     parser.add_argument("--out", type=Path, default=Path("results"), help="output directory")
     parser.add_argument("--name-mode", choices=sorted(NAME_MODES), default="generic")
     parser.add_argument("--match-mode", choices=MATCH_MODES, default="approx")
@@ -173,10 +176,10 @@ def main(argv: list[str] | None = None) -> int:
     print(format_report(config, overall, by_length, by_variant))
 
     args.out.mkdir(parents=True, exist_ok=True)
-    write_results_csv(args.out / "results.csv", results)
+    write_results_csv(args.out / RESULTS_FILE, results)
     summary = build_summary(config, dataset, warnings, overall, by_length, by_variant)
-    (args.out / "summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    (args.out / SUMMARY_FILE).write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     report = build_report(args.out, summary, results, matcher.encode)
     slides = build_slides(args.out, summary, results, matcher.encode)
-    print(f"\nWrote {args.out / 'results.csv'}, {args.out / 'summary.json'}, {report} and {slides}")
+    print(f"\nWrote {args.out / RESULTS_FILE}, {args.out / SUMMARY_FILE}, {report} and {slides}")
     return 0

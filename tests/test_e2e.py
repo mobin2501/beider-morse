@@ -27,7 +27,7 @@ def run_sample(out: Path, *extra: str) -> list[dict]:
     args = ["--names", str(SAMPLE / "names.csv"), "--cases", str(SAMPLE / "test_cases.csv"),
             "--out", str(out), "--allow-uneven", *extra]
     assert main(args) == 0
-    with open(out / "results.csv", encoding="utf-8") as f:
+    with open(out / "artifact 1.csv", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 
@@ -39,9 +39,9 @@ def per_word(tmp_path_factory):
 
 def test_all_outputs_written(per_word):
     out, _ = per_word
-    for name in ("results.csv", "summary.json", "report.pdf", "presentation.md"):
+    for name in ("artifact 1.csv", "artifact 2.json", "artifact 3.pdf", "artifact 4.md"):
         assert (out / name).stat().st_size > 0, name
-    assert (out / "report.pdf").read_bytes().startswith(b"%PDF")
+    assert (out / "artifact 3.pdf").read_bytes().startswith(b"%PDF")
 
 
 def test_per_word_outcomes_are_pinned(per_word):
@@ -59,7 +59,7 @@ def test_per_word_overmatches_compounds(per_word):
 
 def test_summary_totals(per_word):
     out, _ = per_word
-    overall = json.loads((out / "summary.json").read_text(encoding="utf-8"))["overall"]
+    overall = json.loads((out / "artifact 2.json").read_text(encoding="utf-8"))["overall"]
     assert (overall["tp"], overall["fn"], overall["fp"], overall["tn"]) == (14, 3, 1, 6)
 
 

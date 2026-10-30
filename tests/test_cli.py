@@ -39,22 +39,22 @@ def test_run_writes_results_and_summary(data_files, capsys):
     assert "By query length" in stdout
     assert "By variant type" in stdout
 
-    with open(out / "results.csv", encoding="utf-8") as f:
+    with open(out / "artifact 1.csv", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
     assert [(r["case_id"], r["outcome"], r["candidates"]) for r in rows] == [
         ("L05-01", "TP", "Schmidt"),
         ("L03-01", "TN", ""),
     ]
 
-    summary = json.loads((out / "summary.json").read_text(encoding="utf-8"))
+    summary = json.loads((out / "artifact 2.json").read_text(encoding="utf-8"))
     assert summary["config"]["name_mode"] == "generic"
     assert summary["config"]["abydos_version"] == "0.5.0"
     assert summary["dataset"] == {"names": 3, "cases": 2, "positives": 1, "negatives": 1}
     assert summary["overall"]["tp"] == 1 and summary["overall"]["tn"] == 1
     assert set(summary["by_length"]) == {"3", "5"}
     assert summary["warnings"]
-    assert (out / "report.pdf").read_bytes().startswith(b"%PDF")
-    assert "## Slide 11: Recommendations" in (out / "presentation.md").read_text(encoding="utf-8")
+    assert (out / "artifact 3.pdf").read_bytes().startswith(b"%PDF")
+    assert "## Slide 11: Recommendations" in (out / "artifact 4.md").read_text(encoding="utf-8")
 
 
 def test_uneven_data_fails_without_flag(data_files, capsys):
@@ -82,5 +82,5 @@ def test_missing_file_fails(data_files, capsys):
 def test_modes_are_recorded(data_files):
     names, cases, out = data_files
     assert run(names, cases, out, "--allow-uneven", "--match-mode", "exact", "--concat") == 0
-    config = json.loads((out / "summary.json").read_text(encoding="utf-8"))["config"]
+    config = json.loads((out / "artifact 2.json").read_text(encoding="utf-8"))["config"]
     assert (config["match_mode"], config["concat"]) == ("exact", True)

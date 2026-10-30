@@ -1,7 +1,7 @@
 """Static PNG charts shared by the PDF report and the slide content.
 
 Colors follow the validated reference palette (blue/orange pass CVD and contrast
-checks on white). Charts read from the ``summary`` dict saved as summary.json.
+checks on white). Charts read from the ``summary`` dict saved as the run summary JSON.
 """
 
 from __future__ import annotations
@@ -24,8 +24,8 @@ TEXT_MUTED = "#898781"
 GRID = "#e1e0d9"
 AXIS = "#c3c2b7"
 
-RECALL_FPR_CHART = "recall_fpr_by_length.png"
-CANDIDATES_CHART = "candidates_by_length.png"
+RECALL_FPR_CHART = "artifact 5.png"
+CANDIDATES_CHART = "artifact 6.png"
 
 FIG_SIZE = (7.0, 3.2)
 DPI = 200

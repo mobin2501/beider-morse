@@ -1,7 +1,7 @@
-"""Write presentation.md: slide-by-slide content for building a deck by hand.
+"""Write the slide-by-slide content for building a deck by hand.
 
-Every number comes from the same ``summary`` dict as report.pdf, so the deck and
-the report never disagree. Chart paths are relative to presentation.md.
+Every number comes from the same ``summary`` dict as the PDF report, so the deck and
+the report never disagree. Chart paths are relative to the slides file.
 """
 
 from __future__ import annotations
@@ -12,9 +12,9 @@ from pathlib import Path
 
 from bmpm_test.charts import CANDIDATES_CHART, RECALL_FPR_CHART, false_positive_rate
 from bmpm_test.metrics import FN, FP, CaseResult
-from bmpm_test.report import CHARTS_DIR, num, pct, takeaway
+from bmpm_test.report import CHARTS_DIR, REPORT_FILE, num, pct, takeaway
 
-SLIDES_FILE = "presentation.md"
+SLIDES_FILE = "artifact 4.md"
 
 MAX_EXAMPLES = 3
 MAX_LISTED = 4
@@ -105,7 +105,7 @@ def recommendations(summary: dict) -> list[str]:
 
     if overall["fn"] or overall["fp"]:
         recs.append(
-            f"Review the labels of the {overall['fn'] + overall['fp']} listed failures in report.pdf. "
+            f"Review the labels of the {overall['fn'] + overall['fp']} listed failures in {REPORT_FILE}. "
             "Some may be ground-truth errors rather than BMPM errors."
         )
     if not recs:
@@ -119,7 +119,7 @@ def build_slides(
     results: list[CaseResult],
     encode: Callable[[str], frozenset[str]],
 ) -> Path:
-    """Write presentation.md into ``out_dir``; return its path."""
+    """Write the slides file into ``out_dir``; return its path."""
     config, dataset, overall = summary["config"], summary["dataset"], summary["overall"]
     word_mode = "concat (whole-name)" if config["concat"] else "per-word (library default)"
     lengths = sorted(int(k) for k in summary["by_length"])
@@ -135,7 +135,7 @@ def build_slides(
             f"{dataset['names']} reference names, {dataset['cases']} labeled queries",
         ],
         "Title slide.",
-        "This deck summarizes how accurately BMPM matches names by sound. Full details are in report.pdf.",
+        f"This deck summarizes how accurately BMPM matches names by sound. Full details are in {REPORT_FILE}.",
     ))
 
     slides.append(_slide(
@@ -234,7 +234,7 @@ def build_slides(
             variant_bullets.append(f"{name}: false-positive rate {pct(fpr)} ({s['fp']} of {s['fp'] + s['tn']})")
     slides.append(_slide(
         8, "Accuracy by variant type", variant_bullets,
-        "Horizontal bars, one per variant type, or the variant table from report.pdf.",
+        f"Horizontal bars, one per variant type, or the variant table from {REPORT_FILE}.",
         "Recall applies to positive variant types; false-positive rate applies to negative ones.",
     ))
 
@@ -252,7 +252,7 @@ def build_slides(
         9, "Failure examples", failure_bullets,
         "Two-column table: misses on the left, false matches on the right.",
         f"{overall['fn']} misses and {overall['fp']} false matches in total. The full lists, with codes, "
-        "are in report.pdf. A miss means the two names share no phonetic code.",
+        f"are in {REPORT_FILE}. A miss means the two names share no phonetic code.",
     ))
 
     slides.append(_slide(
@@ -277,7 +277,7 @@ def build_slides(
     path = Path(out_dir) / SLIDES_FILE
     header = (
         "# BMPM accuracy test: presentation content\n\n"
-        "Generated from the same run as report.pdf. One section per slide; chart paths are relative to this file.\n"
+        f"Generated from the same run as {REPORT_FILE}. One section per slide; chart paths are relative to this file.\n"
     )
     path.write_text(header + "\n" + "\n".join(slides), encoding="utf-8")
     return path

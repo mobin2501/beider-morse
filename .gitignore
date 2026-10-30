@@ -3,3 +3,12 @@ __pycache__/
 *.pyc
 .pytest_cache/
 results/
+.env/
+.DS_Store
+.planning/
+prompts/
+Deliverables/
+Deliverables.zip
+Metadata.rtf
+*.docx
+*.pptx

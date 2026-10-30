@@ -14,8 +14,8 @@ a negative case passes only when nothing is returned.
 |---|---|
 | `run_test.py` | Entry point (wraps `bmpm_test/cli.py`) |
 | `bmpm_test/` | Data validation, matcher, metrics, PDF report, slide content |
-| `data/names.csv` | The 1000-name reference list (50 per length 2..21) |
-| `data/test_cases.csv` | The 200 labeled test queries |
+| `data/input 1.csv` | The 1000-name reference list (50 per length 2..21) |
+| `data/input 2.csv` | The 200 labeled test queries |
 | `data/sample/` | Small fixture for a quick trial run |
 | `tests/` | pytest suite, including an end-to-end run on the sample |
 | `results/` | Generated output (git-ignored) |
@@ -43,18 +43,18 @@ by length, by variant type) and writes:
 
 | File | Contents |
 |---|---|
-| `results/report.pdf` | Full report: metrics, charts, every miss and false match |
-| `results/presentation.md` | Slide-by-slide content for building a deck |
-| `results/results.csv` | One row per case: outcome (TP/FN/FP/TN) and candidates returned |
-| `results/summary.json` | All metrics plus the run configuration |
-| `results/charts/` | The PNG charts used in the report |
+| `results/artifact 3.pdf` | Full report: metrics, charts, every miss and false match |
+| `results/artifact 4.md` | Slide-by-slide content for building a deck |
+| `results/artifact 1.csv` | One row per case: outcome (TP/FN/FP/TN) and candidates returned |
+| `results/artifact 2.json` | All metrics plus the run configuration |
+| `results/charts/` | The PNG charts used in the report (`artifact 5.png`, `artifact 6.png`) |
 
 ### Options
 
 | Flag | Default | Effect |
 |---|---|---|
-| `--names PATH` | `data/names.csv` | Name list CSV |
-| `--cases PATH` | `data/test_cases.csv` | Test cases CSV |
+| `--names PATH` | `data/input 1.csv` | Name list CSV |
+| `--cases PATH` | `data/input 2.csv` | Test cases CSV |
 | `--out DIR` | `results` | Output directory |
 | `--name-mode` | `generic` | BMPM rule set: `generic`, `ashkenazi` or `sephardic` |
 | `--match-mode` | `approx` | `approx` or `exact` |
@@ -88,7 +88,7 @@ pytest
 
 ## Using a different dataset
 
-Replace `data/names.csv` and `data/test_cases.csv` with your own files, then run
+Replace `data/input 1.csv` and `data/input 2.csv` with your own files, then run
 `python run_test.py`.
 
 Both files must use the column layout shown in `data/sample/`.
@@ -105,3 +105,7 @@ Fix the files and rerun until it passes.
   - an unknown `origin` or `variant_type`
 - **Fatal unless `--allow-uneven` is set:** wrong counts per length, or a
   positive/negative split other than 7/3.
+
+## License
+
+MIT. See [LICENSE](LICENSE).

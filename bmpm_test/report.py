@@ -1,4 +1,4 @@
-"""Render report.pdf from the run summary and per-case results."""
+"""Render the PDF report from the run summary and per-case results."""
 
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ from bmpm_test.charts import (
 )
 from bmpm_test.metrics import FN, FP, CaseResult
 
-REPORT_FILE = "report.pdf"
+REPORT_FILE = "artifact 3.pdf"
 CHARTS_DIR = "charts"
 
 PAGE_WIDTH, PAGE_HEIGHT = A4
@@ -351,7 +351,7 @@ def build_report(
     results: list[CaseResult],
     encode: Callable[[str], frozenset[str]],
 ) -> Path:
-    """Write charts and report.pdf into ``out_dir``; return the PDF path."""
+    """Write charts and the PDF report into ``out_dir``; return the PDF path."""
     out_dir = Path(out_dir)
     charts = build_charts(summary, out_dir / CHARTS_DIR)
     config = summary["config"]

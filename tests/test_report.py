@@ -51,7 +51,7 @@ def results():
 
 def test_build_report_writes_pdf_and_charts(tmp_path, results):
     path = build_report(tmp_path, make_summary(results, ["a warning"]), results, StubMatcher().encode)
-    assert path == tmp_path / "report.pdf"
+    assert path == tmp_path / "artifact 3.pdf"
     assert path.read_bytes().startswith(b"%PDF")
     for chart in (RECALL_FPR_CHART, CANDIDATES_CHART):
         assert (tmp_path / "charts" / chart).read_bytes().startswith(b"\x89PNG")
