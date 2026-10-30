@@ -47,7 +47,8 @@ by length, by variant type) and writes:
 | `results/artifact 4.md` | Slide-by-slide content for building a deck |
 | `results/artifact 1.csv` | One row per case: outcome (TP/FN/FP/TN) and candidates returned |
 | `results/artifact 2.json` | All metrics plus the run configuration |
-| `results/charts/` | The PNG charts used in the report (`artifact 5.png`, `artifact 6.png`) |
+| `results/artifact 5.png` | Chart: recall and false-positive rate by query length |
+| `results/artifact 6.png` | Chart: average candidates returned by query length |
 
 ### Options
 

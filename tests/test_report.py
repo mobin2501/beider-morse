@@ -54,7 +54,7 @@ def test_build_report_writes_pdf_and_charts(tmp_path, results):
     assert path == tmp_path / "artifact 3.pdf"
     assert path.read_bytes().startswith(b"%PDF")
     for chart in (RECALL_FPR_CHART, CANDIDATES_CHART):
-        assert (tmp_path / "charts" / chart).read_bytes().startswith(b"\x89PNG")
+        assert (tmp_path / chart).read_bytes().startswith(b"\x89PNG")
 
 
 def test_build_report_handles_no_failures(tmp_path):

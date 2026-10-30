@@ -12,7 +12,7 @@ from pathlib import Path
 
 from bmpm_test.charts import CANDIDATES_CHART, RECALL_FPR_CHART, false_positive_rate
 from bmpm_test.metrics import FN, FP, CaseResult
-from bmpm_test.report import CHARTS_DIR, REPORT_FILE, num, pct, takeaway
+from bmpm_test.report import REPORT_FILE, num, pct, takeaway
 
 SLIDES_FILE = "artifact 4.md"
 
@@ -46,7 +46,7 @@ def _slide(number: int, title: str, bullets: list[str], visual: str, notes: str)
 
 
 def _chart_ref(filename: str) -> str:
-    return f"`{CHARTS_DIR}/{filename}`"
+    return f"`{filename}`"
 
 
 def _length_extremes(summary: dict, key: str) -> tuple[tuple[float, int], tuple[float, int]] | None:

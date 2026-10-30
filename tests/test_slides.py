@@ -11,7 +11,6 @@ from bmpm_test.metrics import (
     summarize_by_variant,
     summarize_overall,
 )
-from bmpm_test.report import CHARTS_DIR
 from bmpm_test.slides import build_slides, recommendations
 
 CASES = [
@@ -54,7 +53,7 @@ def results():
 @pytest.fixture
 def deck(tmp_path, results):
     summary = make_summary(results)
-    build_charts(summary, tmp_path / CHARTS_DIR)
+    build_charts(summary, tmp_path)
     path = build_slides(tmp_path, summary, results, StubMatcher().encode)
     return path, path.read_text(encoding="utf-8"), summary
 
@@ -79,7 +78,9 @@ def test_numbers_match_summary(deck):
 
 def test_chart_paths_exist(deck):
     path, text, _ = deck
-    for chart in re.findall(r"`(charts/[^`]+\.png)`", text):
+    charts = re.findall(r"`([^`]+\.png)`", text)
+    assert charts
+    for chart in charts:
         assert (path.parent / chart).exists(), chart
 
 

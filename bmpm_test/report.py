@@ -35,7 +35,6 @@ from bmpm_test.charts import (
 from bmpm_test.metrics import FN, FP, CaseResult
 
 REPORT_FILE = "artifact 3.pdf"
-CHARTS_DIR = "charts"
 
 PAGE_WIDTH, PAGE_HEIGHT = A4
 MARGIN = 18 * mm
@@ -353,7 +352,7 @@ def build_report(
 ) -> Path:
     """Write charts and the PDF report into ``out_dir``; return the PDF path."""
     out_dir = Path(out_dir)
-    charts = build_charts(summary, out_dir / CHARTS_DIR)
+    charts = build_charts(summary, out_dir)
     config = summary["config"]
     word_mode = "concat" if config["concat"] else "per-word"
 
